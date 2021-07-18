@@ -1,4 +1,4 @@
-import { PureComponent } from "react";
+import { PureComponent } from 'react';
 
 class ErrorBoundary extends PureComponent {
   state = { hasError: false };
@@ -8,8 +8,8 @@ class ErrorBoundary extends PureComponent {
   }
 
   componentDidCatch(error, info) {
-    console.log("error:", error.message);
-    console.log("info:", info.componentStack);
+    console.log('error:', error.message);
+    console.log('info:', info.componentStack);
   }
 
   render() {

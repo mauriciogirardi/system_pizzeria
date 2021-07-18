@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.button`
-  margin-top: ${(props) => props.top};
+  margin-top: ${props => props.top};
   width: 20rem;
   height: 3.3rem;
   display: flex;

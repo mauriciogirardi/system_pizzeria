@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   background-color: #333;
@@ -19,12 +19,12 @@ export const Container = styled.div`
     color: #939393;
   }
 
-  ${(props) =>
+  ${props =>
     props.isFocused &&
     css`
       border-color: #ff9000;
     `}
-  ${(props) =>
+  ${props =>
     props.isFilled &&
     css`
       svg {

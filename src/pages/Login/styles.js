@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import backgroundImg from "../../assets/background_login.jpg";
+import styled from 'styled-components';
+import backgroundImg from '../../assets/background_login.jpg';
 
 export const Container = styled.div`
   position: relative;
@@ -19,7 +19,7 @@ export const Content = styled.div`
   align-items: center;
 
   h1 {
-    font-family: "Poppins", sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 2.5rem;
     margin-bottom: 2rem;
   }

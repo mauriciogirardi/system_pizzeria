@@ -1,5 +1,5 @@
-import { SiGmail } from "react-icons/si";
-import * as S from "./styles";
+import { SiGmail } from 'react-icons/si';
+import * as S from './styles';
 
 const ButtonGmail = () => {
   return (

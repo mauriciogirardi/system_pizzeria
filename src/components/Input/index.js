@@ -1,5 +1,5 @@
-import { useState, useRef } from "react";
-import * as S from "./styles";
+import { useState, useRef } from 'react';
+import * as S from './styles';
 
 const Input = ({ icon: Icon, ...rest }) => {
   const inputRef = useRef(null);
