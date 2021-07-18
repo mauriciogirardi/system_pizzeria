@@ -5,7 +5,7 @@ const ButtonGmail = () => {
   return (
     <S.Container>
       <SiGmail />
-      Entrar com o gmail
+      Entrar com gmail
     </S.Container>
   );
 };
