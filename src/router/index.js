@@ -1,13 +1,17 @@
+import { lazy, Suspense } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import MainPage from '../pages/MainPage';
-import Login from '../pages/Login';
+
+const MainPage = lazy(() => import('pages/MainPage'));
+const Login = lazy(() => import('pages/Login'));
 
 const Router = () => {
   return (
-    <Switch>
-      <Route path="/login" component={Login} />
-      <Route path="/" component={MainPage} />
-    </Switch>
+    <Suspense fallback={<h1>Carregando...</h1>}>
+      <Switch>
+        <Route path="/login" component={Login} />
+        <Route path="/" component={MainPage} />
+      </Switch>
+    </Suspense>
   );
 };
 

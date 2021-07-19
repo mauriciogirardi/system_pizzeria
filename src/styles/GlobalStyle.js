@@ -1,4 +1,5 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
+import backgroundImg from 'assets/background.jpg';
 
 export const GlobalStyles = createGlobalStyle`
   * {
@@ -12,9 +13,14 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    background-color: #080808;
-    color: #f1f1f1;
+    background: #312e38 url(${backgroundImg}) no-repeat;
+    background-size: cover;
+    color: #fff;
     -webkit-font-smoothing: antialiased;
+
+    @media (max-width: 500px) {
+    background-size: auto;
+    }
   }
 
   body, input, button, textarea {

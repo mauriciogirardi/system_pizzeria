@@ -1,9 +1,7 @@
 import styled from 'styled-components';
-import backgroundImg from '../../assets/background_login.jpg';
+import backgroundImg from '../../assets/forno.jpg';
 
 export const Container = styled.div`
-  position: relative;
-  padding: 0 1.5rem;
   width: 100%;
   height: 100vh;
   display: flex;
@@ -30,22 +28,42 @@ export const Content = styled.div`
 `;
 
 export const Background = styled.div`
-  background-image: url(${backgroundImg});
-  background-repeat: no-repeat;
-  background-position: 0%, 0%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+  background: url(${backgroundImg}) no-repeat;
+  background-size: cover;
+  width: 50%;
   height: 100%;
-  opacity: 0.5;
 
   @media (max-width: 500px) {
-    background-size: cover;
+    display: none;
   }
 `;
 
 export const Form = styled.form`
-  margin-top: 2.5rem;
   width: 20rem;
+`;
+
+export const Line = styled.p`
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  margin: 2rem 0;
+
+  ::after {
+    content: '';
+    width: 8rem;
+    height: 1px;
+    background: #fff;
+    left: 2rem;
+    top: 0.7rem;
+    position: absolute;
+  }
+
+  ::before {
+    content: '';
+    width: 8rem;
+    height: 1px;
+    background: #fff;
+    right: 2rem;
+    top: 0.7rem;
+    position: absolute;
+  }
 `;
