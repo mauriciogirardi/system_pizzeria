@@ -1,4 +1,4 @@
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import Router from './router';
 import { AuthProvider } from 'hooks/useAuth';
 
@@ -6,7 +6,7 @@ const App = () => {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <Router />
+        <Route component={Router} />
       </BrowserRouter>
     </AuthProvider>
   );
