@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 export const Container = styled.div`
   max-width: 1300px;
   margin: 0 auto;
+  padding: 0 2rem;
 
   > h2 {
     margin-top: 0.8rem;
@@ -10,7 +11,6 @@ export const Container = styled.div`
     font-family: 'Poppins', sans-serif;
 
     @media (max-width: 500px) {
-      margin-left: 2rem;
       margin-top: 2rem;
 
       text-align: left;
@@ -38,16 +38,8 @@ export const Content = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   gap: 2.5rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
-  margin-left: 1rem;
-
-  ::-webkit-scrollbar {
-    width: 0;
-  }
 
   @media (max-width: 500px) {
     justify-content: flex-start;

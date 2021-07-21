@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Card = styled.div`
   background-color: #333;
@@ -10,10 +11,7 @@ export const Card = styled.div`
   flex-direction: column;
   align-items: center;
   box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.3);
-  transition: box-shadow 0.2s;
-  scroll-snap-align: start;
-  pointer-events: none;
-  margin: 1rem;
+  transition: all 0.5s;
 
   ${props =>
     props.isActive &&
@@ -22,8 +20,9 @@ export const Card = styled.div`
       box-shadow: 12px 12px 15px rgba(0, 0, 0, 0.3);
     `}
 
-  :hover {
+  &:hover {
     box-shadow: 12px 12px 15px rgba(0, 0, 0, 0.3);
+    border: 2px solid #f90;
   }
 `;
 

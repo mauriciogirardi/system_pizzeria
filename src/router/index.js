@@ -3,8 +3,9 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { useAuth } from 'hooks/useAuth';
 import Loading from 'components/Loading';
+import { HOME, LOGIN } from './routes';
 
-const MainPage = lazy(() => import('pages/MainPage'));
+const Main = lazy(() => import('pages/Main'));
 const Login = lazy(() => import('pages/Login'));
 
 const Router = ({ location }) => {
@@ -21,18 +22,18 @@ const Router = ({ location }) => {
     return <Loading />;
   }
 
-  if (isLoggedIn && location.pathname === '/login') {
-    return <Redirect to="/" />;
+  if (isLoggedIn && location.pathname === LOGIN) {
+    return <Redirect to={HOME} />;
   }
-  if (!isLoggedIn && location.pathname !== '/login') {
-    return <Redirect to="/login" />;
+  if (!isLoggedIn && location.pathname !== LOGIN) {
+    return <Redirect to={LOGIN} />;
   }
 
   return (
-    <Suspense fallback={<h1>Carregando...</h1>}>
+    <Suspense fallback={<Loading />}>
       <Switch>
-        <Route path="/login" component={Login} />
-        <Route path="/" component={MainPage} />
+        <Route path={LOGIN} component={Login} />
+        <Route path={HOME} component={Main} />
       </Switch>
     </Suspense>
   );
