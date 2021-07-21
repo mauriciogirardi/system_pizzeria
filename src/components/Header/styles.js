@@ -4,7 +4,7 @@ export const Container = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 1.5rem 1rem 0;
+  padding: 0.5rem 1.5rem 0.5rem 0;
   background-color: rgba(0, 0, 0, 0.5);
 
   > img {
@@ -46,7 +46,7 @@ export const Profile = styled.div`
 
     @media (max-width: 500px) {
       position: absolute;
-      top: 1.8rem;
+      top: 1.1rem;
       left: 1rem;
     }
   }
