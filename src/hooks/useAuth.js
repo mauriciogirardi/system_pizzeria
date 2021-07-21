@@ -22,7 +22,8 @@ export const AuthProvider = ({ children }) => {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         const dataUser = {
-          name: user.displayName,
+          fullName: user.displayName,
+          name: user.displayName.split(' ')[0],
           avatar: user.photoURL,
           email: user.email,
         };
