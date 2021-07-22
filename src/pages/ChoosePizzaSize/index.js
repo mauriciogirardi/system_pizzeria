@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
 
-import { useAuth } from 'hooks/useAuth';
 import CardSizePizza from 'components/CardSizePizza';
+import Carousel from 'components/Carosel';
+import { Center, Title, SubTitle } from 'Ui';
+import { useAuth } from 'hooks/useAuth';
 import { dataChoosePizzaSize } from 'fakes/choosePizzaSize';
 import { CHOOSE_PIZZA_FLAVOURS } from 'router/routes';
 import * as S from './styles';
@@ -10,12 +12,11 @@ const ChoosePizzaSize = () => {
   const { user } = useAuth();
 
   return (
-    <S.Container>
-      <S.Title>{`O que vai ser hoje, ${user?.name}`}</S.Title>
+    <Center>
+      <Title>{`O que vai ser hoje, ${user?.name}`}</Title>
+      <SubTitle>Escolha o tamanho da pizza</SubTitle>
 
-      <h2>Escolha o tamanho da pizza</h2>
-
-      <S.Content>
+      <Carousel>
         {dataChoosePizzaSize.map(pizza => (
           <Link
             key={pizza.id}
@@ -33,8 +34,8 @@ const ChoosePizzaSize = () => {
             />
           </Link>
         ))}
-      </S.Content>
-    </S.Container>
+      </Carousel>
+    </Center>
   );
 };
 
