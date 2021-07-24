@@ -1,20 +1,25 @@
 import { useState } from 'react';
+import { Redirect, useHistory } from 'react-router-dom';
 
+import formattedCurrency from 'utils/formattedCurrency';
 import CardPizzaFlavours from 'components/CardPizzaFlavours';
+import Footer from 'components/Footer';
 import Carousel from 'components/Carosel';
 import { Title, Center } from 'Ui';
-import { useAuth } from 'hooks/useAuth';
-import { CHOOSE_PIZZA_FLAVOURS, HOME } from 'router/routes';
+import {
+  CHOOSE_PIZZA_FLAVOURS,
+  HOME,
+  CHOOSE_PIZZA_QUANTITY,
+} from 'router/routes';
 import { pizzasFlavours } from 'fakes/pizzasFlavours';
 import * as S from './styles';
-import { Redirect } from 'react-router-dom';
 
 const ChoosePizzaFlavours = ({ location }) => {
   const [checkboxes, setCheckBoxes] = useState({});
-  const { user } = useAuth();
+  const history = useHistory();
 
   if (!location.state) return <Redirect to={HOME} />;
-  const { flavours, id } = location.state;
+  const { flavours, id, name, slices } = location.state;
 
   const checkboxesChecked = checkboxes => {
     return Object.values(checkboxes).filter(Boolean);
@@ -33,29 +38,51 @@ const ChoosePizzaFlavours = ({ location }) => {
     }));
   };
 
-  return (
-    <Center>
-      <Title>{`Escolha até ${flavours} sabores`}</Title>
-      <Carousel>
-        {pizzasFlavours.map(pizza => (
-          <label key={pizza.id}>
-            <S.Checkbox
-              type="checkbox"
-              checked={!!checkboxes[pizza.id]}
-              onChange={e => handleChangeCheckBox(e, pizza.id)}
-            />
+  const handleBack = () => {
+    history.push(HOME);
+  };
 
-            <CardPizzaFlavours
-              to={CHOOSE_PIZZA_FLAVOURS}
-              isActive={!!checkboxes[pizza.id]}
-              name={pizza.name}
-              value={pizza.value[id]}
-              image={pizza.image}
-            />
-          </label>
-        ))}
-      </Carousel>
-    </Center>
+  const handleNext = () => {
+    history.push(CHOOSE_PIZZA_QUANTITY);
+  };
+
+  return (
+    <S.Container>
+      <Center>
+        <Title>{`Escolha até ${flavours} sabores`}</Title>
+        <Carousel>
+          {pizzasFlavours.map(pizza => {
+            return (
+              <label key={pizza.id}>
+                <S.Checkbox
+                  type="checkbox"
+                  checked={!!checkboxes[pizza.id]}
+                  onChange={e => handleChangeCheckBox(e, pizza.id)}
+                />
+
+                <CardPizzaFlavours
+                  to={CHOOSE_PIZZA_FLAVOURS}
+                  isActive={!!checkboxes[pizza.id]}
+                  name={pizza.name}
+                  value={formattedCurrency(pizza.value[id])}
+                  image={pizza.image}
+                />
+              </label>
+            );
+          })}
+        </Carousel>
+      </Center>
+      <Footer
+        isDisabledButtonQtd={!checkboxesChecked(checkboxes).length > 0}
+        name={name}
+        slices={slices}
+        flavours={flavours}
+        nameBack="Mudar quantidade"
+        nameNext="Quantidade"
+        handleBack={handleBack}
+        handleNext={handleNext}
+      />
+    </S.Container>
   );
 };
 

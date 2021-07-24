@@ -8,7 +8,7 @@ const settings = {
   dots: true,
   infinite: false,
   speed: 500,
-  slidesToShow: 3,
+  slidesToShow: 4,
   slidesToScroll: 1,
   cssEase: 'linear',
   responsive: [

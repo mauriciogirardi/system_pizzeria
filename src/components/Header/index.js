@@ -10,7 +10,7 @@ const Header = () => {
     <S.Container>
       <img src={logoImg} alt="Logo" />
       <S.Profile>
-        <p>{user?.name}</p>
+        <p>Olá, {user?.name}</p>
         {!user.avatar && <S.Image />}
         {user.avatar && <img src={user.avatar} alt={user.name} />}
 

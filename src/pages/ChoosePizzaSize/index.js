@@ -6,7 +6,6 @@ import { Center, Title, SubTitle } from 'Ui';
 import { useAuth } from 'hooks/useAuth';
 import { dataChoosePizzaSize } from 'fakes/choosePizzaSize';
 import { CHOOSE_PIZZA_FLAVOURS } from 'router/routes';
-import * as S from './styles';
 
 const ChoosePizzaSize = () => {
   const { user } = useAuth();

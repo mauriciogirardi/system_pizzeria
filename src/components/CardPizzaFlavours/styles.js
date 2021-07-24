@@ -72,5 +72,6 @@ export const ContentCard = styled.div`
 
   p {
     margin-top: 0.8rem;
+    font-size: 1.1rem;
   }
 `;
