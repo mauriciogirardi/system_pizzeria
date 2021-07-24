@@ -21,7 +21,7 @@ const Login = () => {
           <S.Form>
             <Input icon={FiMail} type="text" placeholder="E-mail" />
             <Input icon={FiLock} type="password" placeholder="Senha" />
-            <Button top="1rem" icon={FaSignOutAlt}>
+            <Button top="1rem" icon={FaSignOutAlt} iconLeft>
               Entrar
             </Button>
           </S.Form>
