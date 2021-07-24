@@ -8,6 +8,7 @@ const Center = styled.div`
   align-items: center;
   justify-content: center;
   padding: 0 2rem;
+  margin: 0 auto;
 `;
 
 export default Center;
