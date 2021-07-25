@@ -4,13 +4,25 @@ const OrderContext = createContext({});
 
 export const OrderProvider = ({ children }) => {
   const [pizzas, setPizzas] = useState([]);
+  const [orderInProgress, setOrderInProgress] = useState(false);
 
   const addPizzaToOrder = pizza => {
-    setPizzas(p => p.concat(pizza));
+    if (orderInProgress) {
+      return setPizzas(p => p.concat(pizza));
+    }
+
+    setOrderInProgress(true);
+    setPizzas([pizza]);
+  };
+
+  const sendOrder = () => {
+    setOrderInProgress(false);
   };
 
   return (
-    <OrderContext.Provider value={{ addPizzaToOrder, order: { pizzas } }}>
+    <OrderContext.Provider
+      value={{ addPizzaToOrder, sendOrder, order: { pizzas } }}
+    >
       {children}
     </OrderContext.Provider>
   );

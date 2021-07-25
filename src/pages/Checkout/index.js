@@ -4,6 +4,7 @@ import { FiArrowRight } from 'react-icons/fi';
 import isPluralOrSingular from 'utils/isPluralOrSingular';
 import { useOrder } from 'hooks/useOrder';
 import { useAuth } from 'hooks/useAuth';
+import { CHECKOUT_CONFIRMATION } from 'router/routes';
 import * as S from './styles';
 
 const Checkout = () => {
@@ -182,7 +183,7 @@ const Checkout = () => {
       </S.MainContainer>
 
       <S.Footer>
-        <S.FooterLink disabled={isDisabled()} to="/">
+        <S.FooterLink disabled={isDisabled()} to={CHECKOUT_CONFIRMATION}>
           Finalizar pedido
           <FiArrowRight />
         </S.FooterLink>

@@ -35,7 +35,6 @@ export const ImageCard = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: #fff;
   border-radius: 0.5rem;
   margin-bottom: 1rem;
 
