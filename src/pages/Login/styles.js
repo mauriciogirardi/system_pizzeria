@@ -1,5 +1,14 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import backgroundImg from '../../assets/forno.jpg';
+
+const animate = keyframes`
+  0% {
+    transform: translateY(100px);
+  }
+  100%{
+    transform: translateY(0);
+  }
+`;
 
 export const Container = styled.div`
   width: 100%;
@@ -15,6 +24,7 @@ export const Content = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  animation: ${animate} 0.8s;
 
   h1 {
     font-family: 'Poppins', sans-serif;

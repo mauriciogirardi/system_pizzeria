@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import styled, { css } from 'styled-components';
 
 export const Footer = styled.footer`
   background-color: rgba(0, 0, 0, 0.6);
@@ -38,5 +39,54 @@ export const FooterWrapper = styled.div`
   @media (max-width: 500px) {
     margin-top: 1.5rem;
     width: 100%;
+  }
+`;
+
+export const ButtonLink = styled(Link)`
+  width: 100%;
+  height: 3.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  background-color: #e04343;
+  color: #fff;
+  border-radius: 0.5rem;
+  transition: all 0.3s;
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      opacity: 0.3;
+      pointer-events: none;
+    `}
+
+  svg {
+    font-size: 1.3rem;
+  }
+
+  :hover:not(:disabled) {
+    filter: brightness(0.9);
+  }
+`;
+
+export const ButtonBack = styled.button`
+  width: 100%;
+  height: 3.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  background-color: #e04343;
+  color: #fff;
+  border-radius: 0.5rem;
+  transition: all 0.3s;
+
+  svg {
+    font-size: 1.3rem;
+  }
+
+  :hover:not(:disabled) {
+    filter: brightness(0.9);
   }
 `;

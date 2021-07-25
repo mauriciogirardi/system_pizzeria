@@ -1,38 +1,29 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import Footer from 'components/Footer';
-import Button from 'components/Button';
+import { useOrder } from 'hooks/useOrder';
 import { Title, Center } from 'Ui';
-import {
-  CHOOSE_PIZZA_FLAVOURS,
-  HOME,
-  CHOOSE_PIZZA_QUANTITY,
-} from 'router/routes';
+import { CHECKOUT, HOME } from 'router/routes';
 import * as S from './styles';
 
-const ChoosePizzaQuantity = () => {
-  const [checkboxes, setCheckBoxes] = useState({});
-  const history = useHistory();
+const ChoosePizzaQuantity = ({ location }) => {
+  const [quantity, setQuantity] = useState(1);
+  const { addPizzaToOrder } = useOrder();
 
-  const handleChangeCheckBox = (event, pizzaId) => {
-    if (
-      checkboxesChecked(checkboxes).length === flavours &&
-      event.target.checked
-    )
-      return;
+  if (!location.state) return <Redirect to={HOME} />;
 
-    setCheckBoxes(prevState => ({
-      ...prevState,
-      [pizzaId]: event.target.checked,
-    }));
+  const onChange = e => {
+    const { value } = e.target;
+    setQuantity(Number(value));
   };
 
-  const handleBack = () => {
-    history.push(CHOOSE_PIZZA_FLAVOURS);
+  const addPizza = () => {
+    addPizzaToOrder({
+      ...location.state,
+      quantity,
+    });
   };
-
-  const handleNext = () => {};
 
   return (
     <S.Container>
@@ -40,16 +31,24 @@ const ChoosePizzaQuantity = () => {
         <Title>
           Quantas pizzas você gostaria<br></br> de pedir, com esses sabores?
         </Title>
+
         <S.Content>
-          <input type="number" defaultValue="1" />
-          <Button>Adicionar e montar outra</Button>
+          <input type="number" value={quantity} min={1} onChange={onChange} />
+          <S.ButtonLink to={HOME} onClick={addPizza}>
+            Adicionar e montar outra
+          </S.ButtonLink>
         </S.Content>
       </Center>
+
       <Footer
-        handleBack={handleBack}
-        handleNext={handleNext}
-        nameBack="Mudar sabor"
+        nameBack="Mudar sabores"
         nameNext="Finalizar"
+        buttons={{
+          action: {
+            onClick: addPizza,
+            to: CHECKOUT,
+          },
+        }}
       />
     </S.Container>
   );

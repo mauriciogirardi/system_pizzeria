@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import formattedCurrency from 'utils/formattedCurrency';
 import CardPizzaFlavours from 'components/CardPizzaFlavours';
@@ -13,13 +13,11 @@ import {
 } from 'router/routes';
 import { pizzasFlavours } from 'fakes/pizzasFlavours';
 import * as S from './styles';
-
 const ChoosePizzaFlavours = ({ location }) => {
   const [checkboxes, setCheckBoxes] = useState({});
-  const history = useHistory();
 
   if (!location.state) return <Redirect to={HOME} />;
-  const { flavours, id, name, slices } = location.state;
+  const { flavours, id } = location.state.pizzaSize;
 
   const checkboxesChecked = checkboxes => {
     return Object.values(checkboxes).filter(Boolean);
@@ -38,12 +36,13 @@ const ChoosePizzaFlavours = ({ location }) => {
     }));
   };
 
-  const handleBack = () => {
-    history.push(HOME);
-  };
-
-  const handleNext = () => {
-    history.push(CHOOSE_PIZZA_QUANTITY);
+  const getFlavoursNameAndId = checkboxes => {
+    return Object.entries(checkboxes)
+      .filter(([, value]) => !!value)
+      .map(([id]) => ({
+        id,
+        name: pizzasFlavours.find(flavours => flavours.id === id).name,
+      }));
   };
 
   return (
@@ -72,15 +71,22 @@ const ChoosePizzaFlavours = ({ location }) => {
           })}
         </Carousel>
       </Center>
+
       <Footer
-        isDisabledButtonQtd={!checkboxesChecked(checkboxes).length > 0}
-        name={name}
-        slices={slices}
-        flavours={flavours}
-        nameBack="Mudar quantidade"
+        nameBack="Mudar tamanho"
         nameNext="Quantidade"
-        handleBack={handleBack}
-        handleNext={handleNext}
+        disabled={checkboxesChecked(checkboxes).length === 0}
+        buttons={{
+          action: {
+            to: {
+              pathname: CHOOSE_PIZZA_QUANTITY,
+              state: {
+                ...location.state,
+                pizzaFlavours: getFlavoursNameAndId(checkboxes),
+              },
+            },
+          },
+        }}
       />
     </S.Container>
   );

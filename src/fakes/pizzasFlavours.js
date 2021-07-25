@@ -4,7 +4,7 @@ import pizza03 from 'assets/pizza-toscana.png';
 
 export const pizzasFlavours = [
   {
-    id: 0,
+    id: '0',
     image: pizza01,
     name: 'Calabresa',
     value: {
@@ -14,7 +14,7 @@ export const pizzasFlavours = [
     },
   },
   {
-    id: 1,
+    id: '1',
     image: pizza02,
     name: 'Milho com Bacon',
     value: {
@@ -24,7 +24,7 @@ export const pizzasFlavours = [
     },
   },
   {
-    id: 2,
+    id: '2',
     image: pizza03,
     name: 'Toscana',
     value: {
@@ -34,7 +34,7 @@ export const pizzasFlavours = [
     },
   },
   {
-    id: 3,
+    id: '3',
     image: pizza02,
     name: 'Bacon',
     value: {

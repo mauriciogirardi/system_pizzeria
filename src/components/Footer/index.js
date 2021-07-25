@@ -1,22 +1,34 @@
+import { withRouter, useHistory } from 'react-router-dom';
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 
 import { useAuth } from 'hooks/useAuth';
-import Button from 'components/Button';
+import isPluralOrSingular from 'utils/isPluralOrSingular';
 import * as S from './styles';
 
 const Footer = ({
-  name = '',
-  slices = '',
-  flavours = '',
-  isDisabledButtonQtd,
-  handleBack,
-  handleNext,
+  buttons,
+  disabled,
+  location,
   nameBack = '',
   nameNext = '',
 }) => {
   const { user } = useAuth();
-  const description = `Pizza ${name.toUpperCase()} - (${slices} fatias, ${flavours}
-    ${flavours === 1 ? 'sabor' : 'sabores'})`;
+  const history = useHistory();
+
+  const { pizzaSize, pizzaFlavours } = location.state;
+  const { flavours, name, slices } = pizzaSize;
+
+  const description = `Pizza ${name.toUpperCase()} - (${slices} ${isPluralOrSingular(
+    slices,
+    'fatias',
+    'fatia',
+  )}, ${flavours}
+      ${isPluralOrSingular(flavours, 'sabores', 'sabor')})`;
+
+  const handleBlack = event => {
+    event.preventDefault();
+    history.goBack();
+  };
 
   return (
     <S.Footer>
@@ -24,30 +36,30 @@ const Footer = ({
         <S.FooterInfo>
           <h3>{`${user.name}, seu pedido é:`}</h3>
           <p>{description}</p>
+          {pizzaFlavours && (
+            <p>
+              {`${isPluralOrSingular(
+                pizzaFlavours.length,
+                'Nos sabores',
+                'No sabor',
+              )}: ${pizzaFlavours.map(({ name }) => name).join(', ')}`}
+            </p>
+          )}
         </S.FooterInfo>
 
         <S.FooterWrapper>
-          <Button
-            background="#e04343"
-            icon={FiArrowLeft}
-            iconRight
-            onClick={handleBack}
-          >
+          <S.ButtonBack {...buttons.back} onClick={e => handleBlack(e)}>
+            <FiArrowLeft style={{ marginRight: '0.5rem' }} />
             {nameBack}
-          </Button>
-          <Button
-            disabled={isDisabledButtonQtd}
-            background="#e04343"
-            icon={FiArrowRight}
-            iconLeft
-            onClick={handleNext}
-          >
+          </S.ButtonBack>
+          <S.ButtonLink {...buttons.action} disabled={disabled}>
             {nameNext}
-          </Button>
+            <FiArrowRight style={{ marginLeft: '0.5rem' }} />
+          </S.ButtonLink>
         </S.FooterWrapper>
       </S.FooterContent>
     </S.Footer>
   );
 };
 
-export default Footer;
+export default withRouter(Footer);

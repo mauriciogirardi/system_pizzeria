@@ -1,3 +1,14 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
-export const Container = styled.div``;
+const animate = keyframes`
+  0% {
+    transform: translateY(-100px);
+  }
+  100%{
+    transform: translateY(0);
+  }
+`;
+
+export const Container = styled.div`
+  animation: ${animate} 0.8s;
+`;

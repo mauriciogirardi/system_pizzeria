@@ -7,12 +7,14 @@ import {
   HOME,
   CHOOSE_PIZZA_FLAVOURS,
   CHOOSE_PIZZA_QUANTITY,
+  CHECKOUT,
 } from 'router/routes';
 import * as S from './styles';
 
 const ChoosePizzaSize = lazy(() => import('pages/ChoosePizzaSize'));
 const ChoosePizzaFlavours = lazy(() => import('pages/ChoosePizzaFlavours'));
 const ChoosePizzaQuantity = lazy(() => import('pages/ChoosePizzaQuantity'));
+const Checkout = lazy(() => import('pages/Checkout'));
 
 const Main = () => {
   return (
@@ -30,6 +32,7 @@ const Main = () => {
               path={CHOOSE_PIZZA_QUANTITY}
               component={ChoosePizzaQuantity}
             />
+            <Route path={CHECKOUT} component={Checkout} />
             <Route path={HOME} exact component={ChoosePizzaSize} />
           </Switch>
         </Suspense>
