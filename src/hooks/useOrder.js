@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from 'react';
+import { v4 } from 'uuid';
 
 const OrderContext = createContext({});
 
@@ -8,11 +9,15 @@ export const OrderProvider = ({ children }) => {
 
   const addPizzaToOrder = pizza => {
     if (orderInProgress) {
-      return setPizzas(p => p.concat(pizza));
+      return setPizzas(p => p.concat({ ...pizza, id: v4() }));
     }
 
     setOrderInProgress(true);
-    setPizzas([pizza]);
+    setPizzas([{ ...pizza, id: v4() }]);
+  };
+
+  const removePizzaFromOrder = id => {
+    setPizzas(prevState => prevState.filter(pizza => pizza.id !== id));
   };
 
   const sendOrder = () => {
@@ -21,7 +26,12 @@ export const OrderProvider = ({ children }) => {
 
   return (
     <OrderContext.Provider
-      value={{ addPizzaToOrder, sendOrder, order: { pizzas } }}
+      value={{
+        addPizzaToOrder,
+        sendOrder,
+        removePizzaFromOrder,
+        order: { pizzas },
+      }}
     >
       {children}
     </OrderContext.Provider>
