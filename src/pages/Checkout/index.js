@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FiArrowRight } from 'react-icons/fi';
+import { FiArrowRight, FiTrash } from 'react-icons/fi';
 
 import isPluralOrSingular from 'utils/isPluralOrSingular';
 import { useOrder } from 'hooks/useOrder';
@@ -8,7 +8,7 @@ import { CHECKOUT_CONFIRMATION } from 'router/routes';
 import * as S from './styles';
 
 const Checkout = () => {
-  const { order } = useOrder();
+  const { order, removePizzaFromOrder } = useOrder();
   const { user } = useAuth();
   const [address, setAddress] = useState(false);
   const [local, setLocal] = useState(false);
@@ -35,7 +35,7 @@ const Checkout = () => {
   };
 
   const descriptionTheOrder = () => {
-    return order.pizzas.map((pizza, index) => {
+    return order.pizzas.map(pizza => {
       const { pizzaFlavours, pizzaSize, quantity } = pizza;
       const { name, slices, flavours } = pizzaSize;
       const slicesPizzaSize = isPluralOrSingular(slices, 'fatias', 'fatia');
@@ -51,12 +51,18 @@ const Checkout = () => {
       );
 
       return (
-        <div key={index}>
-          <p>{`${quantity} pizza ${name.toLowerCase()} - ${slices} ${slicesPizzaSize}, ${flavours} ${flavoursPizzaSize}`}</p>
-          <span>{`${flavoursPizza}: ${pizzaFlavours
-            .map(({ name }) => name)
-            .join(', ')}`}</span>
-        </div>
+        <S.Order key={pizza.id}>
+          <div>
+            <p>{`${quantity} pizza ${name.toLowerCase()} - ${slices} ${slicesPizzaSize}, ${flavours} ${flavoursPizzaSize}`}</p>
+            <span>{`${flavoursPizza}: ${pizzaFlavours
+              .map(({ name }) => name)
+              .join(', ')}`}</span>
+          </div>
+
+          <button onClick={() => removePizzaFromOrder(pizza.id)}>
+            <FiTrash />
+          </button>
+        </S.Order>
       );
     });
   };
@@ -85,6 +91,14 @@ const Checkout = () => {
       return false;
 
     return true;
+  };
+
+  const phoneMask = value => {
+    return value
+      .replace(/\D/g, '')
+      .replace(/(\d{2})/, '($1)')
+      .replace(/(\d{5})(\d)/, '$1-$2')
+      .replace(/(-\d{4})\d+?$/, '$1');
   };
 
   return (
@@ -163,7 +177,7 @@ const Checkout = () => {
                   onChange={onChange}
                 />
                 <input
-                  value={values.phone.replace(/\D/g, '')}
+                  value={phoneMask(values.phone)}
                   placeholder="*Telefone"
                   type="tel"
                   name="phone"

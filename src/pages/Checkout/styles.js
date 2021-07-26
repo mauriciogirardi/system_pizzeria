@@ -252,3 +252,30 @@ export const FooterLink = styled(Link)`
     filter: brightness(0.9);
   }
 `;
+
+export const Order = styled.div`
+  position: relative;
+
+  > div {
+    flex: 1;
+  }
+
+  button {
+    position: absolute;
+    top: 0.4rem;
+    right: 0;
+    background: transparent;
+    border: 0;
+
+    svg {
+      font-size: 1.3rem;
+      margin-left: 1rem;
+      color: #e04343;
+      transition: filter 0.2s;
+
+      :hover {
+        filter: brightness(0.8);
+      }
+    }
+  }
+`;
